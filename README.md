@@ -7,7 +7,7 @@ A **Godot** tool to automate the entire process of creating **Godot SpriteFrames
 [2. Requirements](#2-requirements)  
 [3. Project Development](#3-project-development)  
 &nbsp;&nbsp;&nbsp;&nbsp;[3.1. Summary](#31-summary)  
-&nbsp;&nbsp;&nbsp;&nbsp;[3.2. Requirements Model](#32-requirements-model)
+&nbsp;&nbsp;&nbsp;&nbsp;[3.2. Requirements Model](#32-requirements-model)  
 &nbsp;&nbsp;&nbsp;&nbsp;[3.3. Analysis Model](#33-analysis-model)
 
 ## 1. Description
