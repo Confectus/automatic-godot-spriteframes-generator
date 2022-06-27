@@ -8,7 +8,8 @@ A **Godot** tool to automate the entire process of creating **Godot SpriteFrames
 [3. Project Development](#3-project-development)  
 &nbsp;&nbsp;&nbsp;&nbsp;[3.1. Summary](#31-summary)  
 &nbsp;&nbsp;&nbsp;&nbsp;[3.2. Requirements Model](#32-requirements-model)  
-&nbsp;&nbsp;&nbsp;&nbsp;[3.3. Analysis Model](#33-analysis-model)
+&nbsp;&nbsp;&nbsp;&nbsp;[3.3. Analysis Model](#33-analysis-model)  
+&nbsp;&nbsp;&nbsp;&nbsp;[3.4. Design Model](#34-design-model)
 
 ## 1. Description
 
@@ -22,7 +23,7 @@ The Automatic Godot SpriteFrames Generator needs a runnable version of **Blender
 
 ### 3.1. Summary
 
-A pseudo *Cascade Process* was used to implement the tool. For this reason, the obtained models during the process are presented below. In this context, the entire process has been made as a *practical exercise* of a traditional methodology.
+A pseudo *Unified Software Development Process* was used to implement the tool. For this reason, the obtained models during the process are presented below. In this context, the entire process has been made as a *practical exercise* of a traditional methodology.
 
 ### 3.2. Requirements Model
 
@@ -105,3 +106,19 @@ The specific workflow used to satisfy each functional requirement is outlined in
 
 ![Collaboration Diagram - Create Godot SpriteFrames](./documentation/models/analysis/collaboration-diagram_create-godot-spriteframes.jpg)
 </details>
+
+### 3.4. Design Model
+
+<!-- class diagram -->
+
+The design of the tool was done at a very high level of abstraction because Godot does not work directly with classes. For this reason, the Class Diagram shows the core of the code, relating nodes with classes and methods with functions respectively.
+
+The proposed architecture is based on the use of a central controller that manages all the communications between nodes. In a certain way, an *MVC Architecture* has been implemented, since the visual part and the logical part will be managed from different nodes or classes.
+
+<details>
+<summary>Class Diagram - Automatic Godot SpriteFrames Generator</summary>
+
+![Class Diagram - Automatic Godot SpriteFrames Generator](./documentation/models/design/class-diagram_automatic-godot-spriteframes-generator.jpg)
+</details>
+
+Additionally, the Sequence Diagram showing the communications between classes has been omitted, since signals and function calls are used in a different way in Godot.
