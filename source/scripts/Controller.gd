@@ -1,14 +1,14 @@
-class_name Controller
 extends Node
 
 # docstring
-# class that controls the core of the program
+# node that controls the core of the program
 
 func _ready():
 	# directories handler testing
 	run_directories_handler_test()
 	print("")
 
+# function that run a complete test of the directories handler functions
 func run_directories_handler_test():
 	print("=====  directories handler testing  =====")
 	print("")
@@ -65,3 +65,67 @@ func run_directories_handler_test():
 	var bad_empty_dir = $DirectoriesHandler.check_directory_is_empty("C:/Users/" \
 		+ "Confectus/Documents")
 	print("(11) empty directory: " + str(bad_empty_dir) + " : false expected")
+	
+	# checking if a directory is created
+	var ok_create_dir = $DirectoriesHandler.create_directory("C:/Users/" \
+		+ "Confectus/Documents", "New-Directory")
+	print("(12) creating directory: " + str(ok_create_dir) + " : true expected")
+	
+	# checking if a wrong directory is created
+	var bad_create_dir = $DirectoriesHandler.create_directory("C:/Users/" \
+		+ "Confectus/Documents", "New-Directory")
+	print("(13) creating directory: " + str(bad_create_dir) + " : false expected")
+	
+	# checking if a resource is saved
+	var ok_save_res = $DirectoriesHandler.save_resource("C:/Users/Confectus/" \
+		+ "Documents/New-Directory", "New-Resource.tres", SpriteFrames.new())
+	print("(14) saving resource: " + str(ok_save_res) + " : true expected")
+	
+	# checking if a bad resource is saved
+	var bad_save_res = $DirectoriesHandler.save_resource("C:/Users/Confectus/" \
+		+ "Documents/Unknow-Dir", "New-Resource.tres", SpriteFrames.new())
+	print("(15) saving resource: " + str(bad_save_res) + " : false expected")
+	
+	# checking if a file is moved
+	var ok_move_file = $DirectoriesHandler.move_file(
+		"C:/Users/Confectus/Documents/New-Directory",  
+		"C:/Users/Confectus/Documents",
+		"New-Resource.tres"
+		)
+	print("(16) moving file: " + str(ok_move_file) + " : true expected")
+	
+	# checking if a wrong file is moved
+	var bad_move_file = $DirectoriesHandler.move_file(
+		"C:/Users/Confectus/Documents/New-Directory",  
+		"C:/Users/Confectus/Documents",
+		"New-Resource.tres"
+		)
+	print("(17) moving file: " + str(bad_move_file) + " : false expected")
+	
+	# checking if a wrong file is moved
+	var bad_move_file2 = $DirectoriesHandler.move_file(
+		"C:/Users/Confectus/Documents",  
+		"C:/Users/Confectus/Documents/New-Directory",
+		"New-Resource-2.tres"
+		)
+	print("(18) moving file: " + str(bad_move_file2) + " : false expected")
+	
+	# checking if a file is deleted
+	var ok_delete_file = $DirectoriesHandler.delete_file_or_directory("C:/Users/" \
+		+ "Confectus/Documents", "New-Resource.tres")
+	print("(19) deleting file: " + str(ok_delete_file) + " : true expected")
+	
+	# checking if a wrong file is deleted
+	var bad_delete_file = $DirectoriesHandler.delete_file_or_directory("C:/Users/" \
+		+ "Confectus/Documents/New-Directory", "New-Resource.tres")
+	print("(20) deleting file: " + str(bad_delete_file) + " : false expected")
+	
+	# cheking if a directory is deleted
+	var ok_delete_dir = $DirectoriesHandler.delete_file_or_directory("C:/Users/" \
+		+ "Confectus/Documents", "New-Directory")
+	print("(21) deleting directory: " + str(ok_delete_dir) + " : true expected")
+	
+	# cheking if a wrong directory is deleted
+	var bad_delete_dir = $DirectoriesHandler.delete_file_or_directory("C:/Users/" \
+		+ "Confectus/Documents", "New-Directory")
+	print("(22) deleting directory: " + str(bad_delete_dir) + " : false expected")

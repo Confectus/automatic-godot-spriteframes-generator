@@ -8,22 +8,6 @@
 
 config_version=4
 
-_global_script_classes=[ {
-"base": "Node",
-"class": "Controller",
-"language": "GDScript",
-"path": "res://scripts/Controller.gd"
-}, {
-"base": "Node",
-"class": "DirectoriesHandler",
-"language": "GDScript",
-"path": "res://scripts/DirectoriesHandler.gd"
-} ]
-_global_script_class_icons={
-"Controller": "",
-"DirectoriesHandler": ""
-}
-
 [application]
 
 config/name="automatic-godot-spriteframes-generator"
