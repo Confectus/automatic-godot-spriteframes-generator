@@ -357,3 +357,75 @@ func t21_given_full_folder_path_when_splitting_path_then_ok(i):
 		)
 	
 	print(result)
+
+# ===  test function  ===
+# i -> int : it is the index of the test
+func t22_given_path_when_cloning_path_layout_in_empty_folder_then_ok(i):
+	var source = OS.get_system_dir(2) + "/Projects/" \
+		+ "automatic-godot-spriteframes-generator/documentation/models"
+	var destination = OS.get_system_dir(2) + "/Temporal-Folder"
+	var current = false
+	
+	# creating a folder to run the test
+	if $PathsHandler.create_folder(OS.get_system_dir(2), "Temporal-Folder"):
+		current = $PathsHandler.clone_path_layout(source, destination)
+		
+		# deleting the created folders
+		$PathsHandler.delete_resource(
+		OS.get_system_dir(2) + "/Temporal-Folder", "analysis" 
+		)
+		$PathsHandler.delete_resource(
+			OS.get_system_dir(2) + "/Temporal-Folder", "design"
+			)
+		$PathsHandler.delete_resource(
+			OS.get_system_dir(2) + "/Temporal-Folder", "requirements"
+		)
+		$PathsHandler.delete_resource(
+			OS.get_system_dir(2), "Temporal-Folder"
+		)
+		
+	var result = "(" + str(i) + ") "
+	result += "Cloning Folder Layout:"
+	result += "\n"
+	result += testers_handler.assert_equals(current, true)
+	
+	print(result)
+
+# ===  test function  ===
+# i -> int : it is the index of the test
+func t23_given_path_when_cloning_path_layout_in_not_empty_folder_then_fail(i):
+	var source = OS.get_system_dir(2)
+	var destination = OS.get_system_dir(2)
+	var current = $PathsHandler.clone_path_layout(source, destination)
+	
+	var result = "(" + str(i) + ") "
+	result += "Cloning Folder Layout:"
+	result += "\n"
+	result += testers_handler.assert_equals(current, false)
+	
+	print(result)
+
+# ===  test function  ===
+# i -> int : it is the index of the test
+func t24_given_existing_image_when_getting_image_then_ok(i):
+	var texture = ImageTexture.new()
+	var image = Image.new()
+	
+	# opening an image to run the test
+	var root_path = OS.get_system_dir(6) + "/Saved Pictures"
+	var image_name = "Retrato.png"
+	var current = $PathsHandler.get_image(root_path, image_name).get_class()
+	
+	# creating a texture
+	image.load(root_path + "/" + image_name)
+	texture.create_from_image(image)
+	
+	# Comparing classes
+	var expected = texture.get_class()
+	
+	var result = "(" + str(i) + ") "
+	result += "Getting Image Texture:"
+	result += "\n"
+	result += testers_handler.assert_equals(current, expected)
+	
+	print(result)

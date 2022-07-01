@@ -141,7 +141,7 @@ func delete_resource(path: String, resource_name: String) -> bool:
 # ===  public function  ===
 # function that splits the given path into the root path and the resource path
 # the resource can be a file, a resource or a folder
-# path -> String : it is the full path that will be split
+# path -> String : it is the absolute full path that will be split
 # return -> Dictionary : the first key value 'root_path' corresponds to the root 
 # path and the second key value 'resource_name' corresponds to the resource name
 func split_path(path: String) -> Dictionary:
@@ -151,3 +151,64 @@ func split_path(path: String) -> Dictionary:
 	split_values["resource_name"] = path.substr(path.find_last("/") + 1)
 	
 	return split_values
+
+# ===  public function  ===
+# function that clones the folder layout of the given source path into the
+# given destination path
+# the clonation will only be done if the destination path is empty
+# the clonation will clone hidden folders
+# source -> String : it is the absolute source path that will be cloned
+# destination -> String : it is the absolute destination path where the layout 
+# will be cloned
+# return -> bool : true if the complete layout was cloned, false if not
+func clone_path_layout(source: String, destination: String) -> bool:
+	var source_existence = check_path_existence(source)
+	var destination_existence = check_path_existence(destination)
+	var destination_is_empty = check_folder_is_empty(destination)
+	var validation = true
+	
+	# controlling all the requirements to clone the source layout
+	if source_existence and destination_existence and destination_is_empty:
+		var paths_handler = Directory.new()
+		
+		# pointing to the begin of the directory
+		if paths_handler.open(source) == OK:
+			paths_handler.list_dir_begin(true)
+			var file_name = paths_handler.get_next()
+			
+			# iterating across all the folders in the source path
+			while file_name != "":
+				if paths_handler.current_is_dir():
+					# recursive clonation
+					if create_folder(destination, file_name):
+						validation = validation and clone_path_layout(
+							source + "/" + file_name, 
+							destination + "/" + file_name
+							)
+					
+					# breaking point
+					if not validation:
+						return false
+				
+				file_name = paths_handler.get_next()
+		else:
+			return false
+	else:
+		return false
+	
+	return validation
+
+# ===  public function  ===
+# function that gets and image and returns its texture
+# path -> String : it is the absolute path where the image is located
+# image_name -> String : it is the name of the image that will be used
+# return -> Texture : the texture of the image or null if there was an error
+func get_image(path: String, image_name: String) -> Texture:
+	var texture_handler = ImageTexture.new()
+	var image_handler = Image.new()
+	
+	if image_handler.load(path + "/" + image_name) == OK:
+		texture_handler.create_from_image(image_handler)
+		return texture_handler
+	
+	return null
