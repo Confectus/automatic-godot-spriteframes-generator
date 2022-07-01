@@ -137,3 +137,17 @@ func delete_resource(path: String, resource_name: String) -> bool:
 				return true
 	
 	return false
+
+# ===  public function  ===
+# function that splits the given path into the root path and the resource path
+# the resource can be a file, a resource or a folder
+# path -> String : it is the full path that will be split
+# return -> Dictionary : the first key value 'root_path' corresponds to the root 
+# path and the second key value 'resource_name' corresponds to the resource name
+func split_path(path: String) -> Dictionary:
+	var split_values = {"root_path": null, "resource_name": null}
+	
+	split_values["root_path"] = path.substr(0, path.find_last("/"))
+	split_values["resource_name"] = path.substr(path.find_last("/") + 1)
+	
+	return split_values

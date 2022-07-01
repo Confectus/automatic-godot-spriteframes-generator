@@ -313,3 +313,47 @@ func t19_given_not_existing_folder_when_deleting_folder_then_fail(i):
 	result += testers_handler.assert_equals(current, false)
 	
 	print(result)
+
+# ===  test function  ===
+# i -> int : it is the index of the test
+func t20_given_full_resource_path_when_splitting_path_then_ok(i):
+	var full_path = "C:/Users/Confectus/Documents/Apps/Blender/blender.exe"
+	var expected_root_path = "C:/Users/Confectus/Documents/Apps/Blender"
+	var expected_resource_name = "blender.exe"
+	var split_values = $PathsHandler.split_path(full_path)
+	
+	var result = "(" + str(i) + ") "
+	result += "Splitting Path:"
+	result += "\n"
+	result += testers_handler.assert_equals(
+		split_values["root_path"], 
+		expected_root_path
+		)
+	result += testers_handler.assert_equals(
+		split_values["resource_name"], 
+		expected_resource_name
+		)
+	
+	print(result)
+
+# ===  test function  ===
+# i -> int : it is the index of the test
+func t21_given_full_folder_path_when_splitting_path_then_ok(i):
+	var full_path = OS.get_system_dir(2) + "/Zoom"
+	var expected_root_path = OS.get_system_dir(2)
+	var expected_resource_name = "Zoom"
+	var split_values = $PathsHandler.split_path(full_path)
+	
+	var result = "(" + str(i) + ") "
+	result += "Splitting Path:"
+	result += "\n"
+	result += testers_handler.assert_equals(
+		split_values["root_path"], 
+		expected_root_path
+		)
+	result += testers_handler.assert_equals(
+		split_values["resource_name"], 
+		expected_resource_name
+		)
+	
+	print(result)
