@@ -4,7 +4,7 @@ extends Node
 # script that handles all the interactions between paths, including files,
 # resources and folders
 #
-# its goal is provide a simplified way to control the files library of the OS
+# its goal is to provide a simplified way to control the files library of the OS
 # 
 # in that way, all the functions work with absolute paths for files, 
 # resources and folders
