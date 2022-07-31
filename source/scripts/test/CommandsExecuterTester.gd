@@ -76,3 +76,28 @@ func t02_given_wrong_path_when_checking_engine_path_then_fail(i):
 	result += testers_handler.assert_equals(current, false)
 	
 	print(result)
+
+# ===  test function  ===
+# i -> int : it is the index of the test
+func t03_given_blender_file_when_rendering_scene_then_ok(i):
+	var engine_path = OS.get_system_dir(2) + "/Apps/Blender/blender.exe"
+	var file_path = "C:/Users/Confectus/Desktop/blender_test/model.blend"
+	var output_path = "C:/Users/Confectus/Desktop/folder/"
+	var scene = "OriginalScene"
+	var firstFrame = "1"
+	var lastFrame = "20"
+	var current = $CommandsExecuter.execute_rendering_command(
+		engine_path,
+		file_path,
+		output_path,
+		scene,
+		firstFrame,
+		lastFrame
+	)
+	
+	var result = "(" + str(i) + ") "
+	result += "Rendering Blender file:"
+	result += "\n"
+	result += testers_handler.assert_equals(typeof(current), typeof(0))
+	
+	print(result)

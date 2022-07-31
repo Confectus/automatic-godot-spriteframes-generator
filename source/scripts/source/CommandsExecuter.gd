@@ -30,3 +30,36 @@ func check_engine_path(path: String) -> bool:
 			return true
 	
 	return false
+
+# ===  public function  ===
+# function that executes a OS command in Blender engine to render a scene
+# contained in a Blender file
+# engine_path -> String : it is the absolute path of the Blender engine
+# file_path -> String : it is the absolute Blender file path
+# output_path -> String : it is the absolute folder path where renders will be
+# saved
+# scene -> String : it is the name of the scene that will be rendered
+# first_frame -> String : it is the first key frame of the animation
+# last_frame -> String : it is the last key frame of the animation
+# return -> int : it is the ID of the rendering process in the OS
+func execute_rendering_command(
+		engine_path: String, file_path: String,
+		output_path: String, scene: String, 
+		first_frame: String, last_frame: String
+	) -> int:
+	
+	var arguments = [
+		"-b",
+		file_path,
+		"-o",
+		output_path,
+		"-S",
+		scene,
+		"-s",
+		first_frame,
+		"-e",
+		last_frame,
+		"-a"
+	]
+	
+	return OS.execute(engine_path, arguments, false)
