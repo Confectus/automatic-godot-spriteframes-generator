@@ -24,6 +24,11 @@ func _init():
 		"CommandsExecuterTester",
 		"res://scripts/test/CommandsExecuterTester.gd"
 		)
+	
+	create_child(
+		"RendersScalerTester",
+		"res://scripts/test/RendersScalerTester.gd"
+		)
 
 # ===  global function  ===
 # function that compares two values and returns a simplified message about the
@@ -67,4 +72,5 @@ func run_children_complete_tests():
 	print("=====   TESTING PHASE   =====\n")
 	
 	for child in get_children():
-		child.run_complete_test()
+		if child.name != "PathsHandlerTester" and child.name != "CommandsExecuterTester": # --- provisional ---
+			child.run_complete_test()
