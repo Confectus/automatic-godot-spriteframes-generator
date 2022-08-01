@@ -72,5 +72,4 @@ func run_children_complete_tests():
 	print("=====   TESTING PHASE   =====\n")
 	
 	for child in get_children():
-		if child.name != "PathsHandlerTester" and child.name != "CommandsExecuterTester": # --- provisional ---
-			child.run_complete_test()
+		child.run_complete_test()

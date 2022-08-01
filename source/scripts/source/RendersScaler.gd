@@ -27,12 +27,12 @@ func get_render_width(render: Texture) -> int:
 # dimensions
 # render -> Texture : the texture that will be used to check the scaling 
 # possibilities
-# height -> int : the height that will be used for the scaling
 # width -> int : the width that will be used for the scaling
+# height -> int : the height that will be used for the scaling
 # return -> bool : true if scaling is possible, false if not
-func scaling_is_possible(render: Texture, height: int, width: int) -> bool:
+func scaling_is_possible(render: Texture, width: int, height: int) -> bool:
 	if render != null:
-		if height <= MAX_SIZE and width <= MAX_SIZE:
+		if width <= MAX_SIZE and height <= MAX_SIZE :
 			return true
 	
 	return false
